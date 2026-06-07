@@ -23,11 +23,8 @@ Our power and sensor network is designed for redundancy and noise reduction.
 * **Power Management:** The system is powered by a high-discharge LiPo battery. To prevent voltage drops during motor spikes, the Arduino and sensors are powered through a dedicated 5V step-down buck converter, separating the logic circuit from the high-current L298N motor driver circuit.
 * **Sensor Selection & Placement:**
   * **2x TCS34725 Color Sensors:** Placed at the front-left and front-right for robust traffic sign detection (Red/Green). 
-  * **I2C Multiplexing (TCA9548A):** Since the TCS34725 sensors share a hardcoded I2C address (0x29), we integrated a TCA9548A Multiplexer. This hardware-level solution allows us to poll both sensors seamlessly at high frequencies without power-cycling (XSHUT) pins, which would clear sensor memory and induce severe latency.
-  * **2x HC-SR04 Ultrasonic Sensors:** One faces directly forward for wall tracking and corner detection. The second is mounted at exactly 90 degrees on the right door to scan for the 36cm parking space during the final lap.
-  * **MPU6050 IMU:** Placed as close to the center of gravity as possible to calculate the Z-axis (Yaw) drift and track 90-degree cornering and 180-degree U-turns accurately.
-
----
+  * **1* HC-SR04 Ultrasonic Sensors:** One faces directly forward for wall tracking and corner detection. The second is mounted at exactly 90 degrees on the right door to scan for the 36cm parking space during the final lap.
+  ---
 
 ## 4. Software Architecture & Obstacle Strategy
 We eliminated all thread-blocking `delay()` functions during active navigation, replacing them with a `millis()` based time-tracking logic. This prevents the robot from going "blind" during turns.
